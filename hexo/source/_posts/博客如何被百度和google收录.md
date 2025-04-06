@@ -58,10 +58,10 @@ Sitemap: https://ckj3134.github.io/sitemap.xml
 
 ## 4.提交站点地图
 ### 4.1 提交到百度
-登录 百度搜索资源平台。
+登录 [百度搜索资源平台](http://ziyuan.baidu.com/)。
 添加你的博客网址（如 https://ckj3134.github.io）。
 在 链接提交 > 自动提交 中，提交 baidusitemap.xml 的地址（如 https://ckj3134.github.io/baidusitemap.xml）。
 ### 4.2 提交到谷歌
-登录 Google Search Console。
+登录 [Google Search Console](https://search.google.com/search-console/)。
 添加你的博客网址（如 https://ckj3134.github.io）。
 在 Sitemaps 中，提交 sitemap.xml 的地址（如 https://ckj3134.github.io/sitemap.xml）。
