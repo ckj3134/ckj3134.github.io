@@ -20,17 +20,25 @@ jobs:
       with:
         node-version: '16' # Hexo 推荐使用 Node.js 16
 
+    # 进入 hexo 目录
+    - name: Change directory to hexo
+      run: cd hexo
+
     # 安装依赖
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd hexo
+        npm install
 
     # 生成静态文件
     - name: Build Hexo
-      run: npx hexo generate
+      run: |
+        cd hexo
+        npx hexo generate
 
     # 部署到 gh-pages 分支
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        publish_dir: ./hexo/public
