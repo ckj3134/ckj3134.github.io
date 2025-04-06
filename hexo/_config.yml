@@ -104,3 +104,14 @@ theme: next
 #   type: git
 #   repo: https://github.com/ckj3134/ckj3134.github.io.git
 #   branch: gh-pages
+
+# SEO
+seo:
+  enable: true
+
+# Sitemap 配置
+sitemap:
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml
