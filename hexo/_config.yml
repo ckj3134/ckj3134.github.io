@@ -100,7 +100,7 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: git
-  repo: https://github.com/ckj3134/ckj3134.github.io.git
-  branch: gh-pages
+# deploy:
+#   type: git
+#   repo: https://github.com/ckj3134/ckj3134.github.io.git
+#   branch: gh-pages
