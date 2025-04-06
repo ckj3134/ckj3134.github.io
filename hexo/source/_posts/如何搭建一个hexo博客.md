@@ -24,7 +24,7 @@ $ npm install
 ### github 配置
 #### 新增repo
 在GitHub新增一个repo，取名为同名的项目加上 .github.io 如下图
-![alt text](image.png)
+![alt text](/images/image.png)
 
 新增完之后可以git clone下来在本地
 `git clone https://github.com/ckj3134/ckj3134.github.io.git`
@@ -34,7 +34,7 @@ $ npm install
 本地会有一个`ckj3134.github.io.git`目录
 在目录下运行hexo命令行`hexo init hexo`
 可以看到目录下多了一个hexo的文件夹
-![alt text](image-1.png)
+![alt text](/images/image-1.png)
 文件夹中的格式如下
 ```
 .
@@ -48,13 +48,13 @@ $ npm install
 ```
 ### 通过github actions自动化部署hexo
 进行settings页面进行actions>general将所有权限设置为有权限
-![alt text](image-2.png)
+![alt text](/images/image-2.png)
 
 在进入pages页面，将source改成 github actions
 
 #### 新增配置文件
 github actions里面很明显要新增自己的workflow
-![alt text](image-3.png)
+![alt text](/images/image-3.png)
 
 所以我们在目录下新增一个`.github/workflows/deploy.yml`的文件
 
