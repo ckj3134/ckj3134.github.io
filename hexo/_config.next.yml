@@ -1,0 +1,66 @@
+scheme: Gemini
+darkmode: true
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+
+symbols_count_time:
+  enable: true
+
+custom_file_path:
+  style: source/_data/styles.styl
+
+font:
+  enable: true
+  global:
+    family: Roboto  # 主字体
+    external: true  # 从 Google Fonts 加载
+  heading:
+    family: Roboto Slab  # 标题字体
+    external: true
+
+menu_settings:
+  icons: true
+  badges: false  # 可选：显示标签计数
+
+index_post_content:
+  method: 2  # 自动截取摘要
+  length: 150  # 摘要长度（字符数）
+
+post_thumbnail: true
+
+codeblock:
+  highlight_style: dracula  # 暗色主题
+  copy_button: true  # 添加复制按钮
+
+vendors:
+  css: cdn  # 使用 CDN 加速
+  js: cdn
+
+leancloud_visitors:
+  enable: true
+  app_id: your_app_id
+  app_key: your_app_key
+
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+
+footer:
+  since: 2025  # 博客起始年份
+  powered:
+    enable: false  # 隐藏“Powered by Hexo”
+  custom_text: "© 2025 My Blog"  # 自定义文本
+
+social:
+  GitHub: https://github.com/ckj3134 || fa fa-github
+  Email: mailto:491565693@qq.com || fa fa-envelope
+
+avatar:
+  url: /images/avater.jpg  # 图片路径
+  rounded: true  # 圆形头像
+  opacity: 0.9
+
