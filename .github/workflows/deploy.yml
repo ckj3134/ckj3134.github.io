@@ -36,6 +36,10 @@ jobs:
         cd hexo
         npx hexo generate
 
+    # 在生成静态文件后添加
+    - name: Disable Jekyll
+      run: touch ./hexo/public/.nojekyll
+
     # 部署到 gh-pages 分支
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
