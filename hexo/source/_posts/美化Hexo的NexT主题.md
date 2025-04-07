@@ -1,7 +1,7 @@
 ---
 title: 美化Hexo的NexT主题
 date: 2025-04-07 01:18:15
-tags:
+tags: 博客搭建
 ---
 
 # 如何通过 `_config.next.yml` 优化 Hexo 的 NexT 主题

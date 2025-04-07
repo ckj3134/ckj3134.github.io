@@ -1,7 +1,7 @@
 ---
 title: 如何将 GitHub Pages博客绑定到自定义域名
 date: 2025-04-07 00:09:29
-tags:
+tags: 博客搭建
 ---
 
 # 如何将 GitHub Pages 博客绑定到自定义域名

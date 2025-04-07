@@ -1,7 +1,7 @@
 ---
 title: 博客如何被百度和google收录
 date: 2025-04-06 19:04:51
-tags:
+tags: 博客搭建
 ---
 
 # 如何让 GitHub Pages 生成的 Hexo 博客被百度和谷歌收录

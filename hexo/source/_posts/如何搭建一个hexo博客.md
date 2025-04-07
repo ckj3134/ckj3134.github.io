@@ -1,7 +1,7 @@
 ---
 title: 如何搭建一个hexo博客
 date: 2025-04-06 18:35:14
-tags:
+tags: 博客搭建
 ---
 ## 如何用github actions搭建一个hexo的博客
 以前用wordpress搭建了一个博客，那时候整了个学生机，开了6年，现在过期了，博客也没了，痛定思痛决定用github的github.io搭建一个博客
