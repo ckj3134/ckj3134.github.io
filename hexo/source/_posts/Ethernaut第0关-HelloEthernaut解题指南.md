@@ -1,7 +1,7 @@
 ---
 title: Ethernaut 第0关-Hello Ethernaut 解题指南
 date: 2025-04-08 00:55:16
-tags:
+tags: web3,安全
 ---
 
 # Ethernaut 第 0 关 - Hello Ethernaut 解题指南
