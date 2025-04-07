@@ -1,66 +1,102 @@
+# NEXT 主题配置（优化版）
+
+# 主题风格和模式
 scheme: Gemini
 darkmode: true
+
+# 导航菜单设置
 menu:
   home: / || fa fa-home
   archives: /archives/ || fa fa-archive
   tags: /tags/ || fa fa-tags
   about: /about/ || fa fa-user
 
+menu_settings:
+  icons: true          # 显示菜单图标
+
+# 页面加载动画
+preloader:
+  enable: true
+
+# 页面计时功能（例如阅读时间统计）
 symbols_count_time:
   enable: true
 
+# 自定义样式文件（不影响主题源码）
 custom_file_path:
   style: source/_data/styles.styl
+  styles: source/css/_custom.scss
 
+# 代码高亮设置
+code:
+  highlight_theme: atom-one-dark  # 代码主题，可选：normal, night, night eighties, atom-one-dark, github
+  highlight_style: dracula        # 代码高亮风格
+
+codeblock:
+  highlight_style: dracula        # 代码块高亮风格（暗色主题）
+  copy_button: true               # 显示代码复制按钮
+
+# 字体设置
 font:
   enable: true
   global:
-    family: Roboto  # 主字体
-    external: true  # 从 Google Fonts 加载
-  heading:
-    family: Roboto Slab  # 标题字体
+    family: "'Noto Serif SC', serif"
+  headings:
+    family: "'Roboto Slab', sans-serif"  # 合并标题字体，建议加载外部字体时在页面中引入对应资源
     external: true
+  posts:
+    family: "'Noto Sans SC', sans-serif"
 
-menu_settings:
-  icons: true
-  badges: false  # 可选：显示标签计数
-
+# 文章内容摘要设置
 index_post_content:
-  method: 2  # 自动截取摘要
-  length: 150  # 摘要长度（字符数）
+  method: 2       # 自动截取摘要
+  length: 150     # 摘要长度（字符数）
 
+# 文章缩略图开关
 post_thumbnail: true
 
-codeblock:
-  highlight_style: dracula  # 暗色主题
-  copy_button: true  # 添加复制按钮
-
+# 加速资源加载（使用 CDN）
 vendors:
-  css: cdn  # 使用 CDN 加速
+  css: cdn
   js: cdn
 
+# LeanCloud 访客统计（需正确配置 app_id 和 app_key）
 leancloud_visitors:
   enable: true
-  app_id: your_app_id
-  app_key: your_app_key
+  app_id: paNtUYfs3UmVwxGOs7Zcl60V-gzGzoHsz
+  app_key: T3SBqYhheuIK6GP9gKcE7faa
 
+# 本地搜索设置
 local_search:
   enable: true
   trigger: auto
   top_n_per_article: 1
 
+# 页脚信息设置
 footer:
-  since: 2025  # 博客起始年份
+  since: 2025                # 博客起始年份（可修改为你博客的实际年份）
   powered:
-    enable: false  # 隐藏“Powered by Hexo”
-  custom_text: "© 2025 My Blog"  # 自定义文本
+    enable: false            # 隐藏 “Powered by Hexo”
+  custom_text: "© 2025 My Blog"  # 自定义页脚文本
 
+# 社交链接
 social:
   GitHub: https://github.com/ckj3134 || fa fa-github
   Email: mailto:491565693@qq.com || fa fa-envelope
 
+# 头像设置
 avatar:
-  url: /images/avater.jpg  # 图片路径
-  rounded: true  # 圆形头像
+  url: /images/avater.jpg  # 头像图片路径
+  rounded: true            # 圆形头像
   opacity: 0.9
 
+# 文章元信息和卡片样式
+post_meta:
+  style: block             # 可选：block / inline
+
+post_card:
+  style: shadow            # 可选：shadow / flat / bordered
+
+# 分页样式
+pagination:
+  style: scroll            # 可选：scroll, classic, next

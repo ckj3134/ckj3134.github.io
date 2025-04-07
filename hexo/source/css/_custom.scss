@@ -1,0 +1,6 @@
+// 让首页背景变透明 + 毛玻璃
+.site-brand-container {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
+  
