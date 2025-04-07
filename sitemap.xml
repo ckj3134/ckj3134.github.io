@@ -4,7 +4,12 @@
 
     <sitemap>
         <loc>https://ckj3134.github.io/post-sitemap.xml</loc>
-        <lastmod>2025-04-06T17:27:47.771Z</lastmod>
+        <lastmod>2025-04-07T16:56:50.983Z</lastmod>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://ckj3134.github.io/tag-sitemap.xml</loc>
+        <lastmod>2025-04-07T16:56:50.983Z</lastmod>
     </sitemap>
 
 </sitemapindex>
