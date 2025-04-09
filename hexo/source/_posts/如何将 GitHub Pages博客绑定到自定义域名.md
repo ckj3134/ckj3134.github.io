@@ -8,6 +8,8 @@ tags: 博客搭建
 
 这是一个简单的指南，帮助你将 GitHub Pages 生成的博客（例如 `ckj3134/ckj3134.github.io`）绑定到自定义域名（例如 `www.ckj3134.site`）。按照以下步骤操作，你将能够通过自定义域名访问你的博客，并且访客不会注意到它托管在 GitHub Pages 上。
 
+<!-- more -->
+
 ## 前提条件
 1. 你已经在 GitHub 上创建了一个博客（例如使用 Jekyll），并通过 GitHub Pages 部署，URL 为 `ckj3134/ckj3134.github.io`。
 2. 你已经购买了一个自定义域名（例如 `www.ckj3134.site`），我是在腾讯云上购买的。

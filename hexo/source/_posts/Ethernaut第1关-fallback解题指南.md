@@ -8,6 +8,8 @@ tags: web3,securtiy
 
 Ethernaut 是 OpenZeppelin 提供的 Web3/Solidity 战游戏，通过“黑客”智能合约帮助学习以太坊安全知识。第 1 关“Fallback”是一个基础关卡，旨在让玩家理解回退函数的潜在漏洞。本指南详细解释如何解决关卡 [https://ethernaut.openzeppelin.com/level/0x3c34A342b2aF5e885FcaA3800dB5B205fEfa3ffB](https://ethernaut.openzeppelin.com/level/0x3c34A342b2aF5e885FcaA3800dB5B205fEfa3ffB)，并提供完整步骤。
 
+<!-- more -->
+
 ## 前提条件
 - 安装并配置 [Metamask](https://metamask.io/)，连接到 Sepolia 测试网。
 - 从 [Sepolia Faucet](https://sepoliafaucet.com/) 获取测试网 ETH。

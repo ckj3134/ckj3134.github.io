@@ -8,6 +8,8 @@ tags: web3,安全
 
 Ethernaut 是 OpenZeppelin 提供的 Web3/Solidity 战游戏，通过“黑客”智能合约帮助学习以太坊安全知识。第 0 关“Hello Ethernaut”是一个入门关卡，旨在让玩家熟悉游戏界面和基本合约交互。本指南详细解释如何解决关卡 [https://ethernaut.openzeppelin.com/level/0x7E0f53981657345B31C59aC44e9c21631Ce710c7](https://ethernaut.openzeppelin.com/level/0x7E0f53981657345B31C59aC44e9c21631Ce710c7)，并提供完整步骤。
 
+<!-- more -->
+
 ## 前提条件
 - 安装并配置 [Metamask](https://metamask.io/)，连接到 Sepolia 测试网。
 - 从 [Sepolia Faucet](https://sepoliafaucet.com/) 获取测试网 ETH。
