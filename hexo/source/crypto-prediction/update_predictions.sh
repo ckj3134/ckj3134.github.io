@@ -9,6 +9,9 @@ TARGET_DIR="$BLOG_DIR/source/crypto-prediction"
 # 确保目标目录存在
 mkdir -p $TARGET_DIR
 
+# 设置时区为东八区（Asia/Shanghai）
+export TZ=Asia/Shanghai
+
 # 运行预测脚本
 cd $PREDICTION_DIR
 echo "运行比特币预测脚本..."
@@ -23,8 +26,9 @@ cp $PREDICTION_DIR/btc_prediction.png $TARGET_DIR/
 cp $PREDICTION_DIR/eth_prediction.png $TARGET_DIR/
 cp $PREDICTION_DIR/eth_predictions.csv $TARGET_DIR/
 
-# 更新页面中的日期
+# 更新页面中的日期（使用东八区时间）
 TODAY=$(date +%Y-%m-%d)
+echo "当前东八区日期: $TODAY"
 sed -i '' "s/date: [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/date: $TODAY/" $TARGET_DIR/index.md
 
 # 生成博客
