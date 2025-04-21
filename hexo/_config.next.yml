@@ -9,6 +9,7 @@ menu:
   home: / || fa fa-home
   archives: /archives/ || fa fa-archive
   tags: /tags/ || fa fa-tags
+  crypto-prediction: /crypto-prediction/ || fa fa-chart-line
   about: /about/ || fa fa-user
 
 menu_settings:
@@ -76,7 +77,7 @@ local_search:
 footer:
   since: 2025                # 博客起始年份（可修改为你博客的实际年份）
   powered:
-    enable: false            # 隐藏 “Powered by Hexo”
+    enable: false            # 隐藏 "Powered by Hexo"
   custom_text: "© 2025 My Blog"  # 自定义页脚文本
 
 # 社交链接
