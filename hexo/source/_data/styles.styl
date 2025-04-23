@@ -1,2 +1,366 @@
-$main-color = #1e90ff  // 主色调改为蓝色
-$body-bg = #f9f9f9     // 背景色改为浅灰
+// 主色调与背景定义
+$main-color = #4a86e8
+$secondary-color = #6db0f3
+$accent-color = #ff7e7e
+$body-bg-color = #f8f9fa
+$card-bg-color = #ffffff
+$text-color = #333333
+$text-light-color = #777777
+
+// 全局样式优化
+body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: $body-bg-color;
+  transition: all 0.3s;
+  letter-spacing: 0.01em;
+  color: $text-color;
+}
+
+// 头部导航栏优化
+.header {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(90deg, $main-color 0%, $secondary-color 100%);
+}
+
+.site-meta {
+  font-weight: 500;
+}
+
+.site-brand-container {
+  padding: 10px 0;
+  transition: all 0.3s;
+}
+
+.main-menu {
+  .menu-item {
+    margin: 0 12px;
+    border-radius: 5px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.menu-item-active {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+// 文章卡片样式优化
+.post {
+  margin-bottom: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  background-color: $card-bg-color;
+  transition: all 0.3s;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.post-header {
+  padding: 18px 25px;
+}
+
+.post-title {
+  font-size: 22px;
+  font-weight: 600;
+  
+  .post-title-link {
+    position: relative;
+    color: $main-color;
+    
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: $main-color;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    &:hover:after {
+      visibility: visible;
+      width: 100%;
+    }
+  }
+}
+
+.post-meta {
+  font-size: 13px;
+  color: $text-light-color;
+  
+  .post-meta-item {
+    margin-right: 12px;
+  }
+  
+  .post-meta-icon {
+    margin-right: 3px;
+  }
+}
+
+.post-body {
+  padding: 0 25px 15px;
+  
+  p {
+    margin: 0 0 20px;
+    line-height: 1.8;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin: 35px 0 15px;
+    color: #222;
+    font-family: 'Roboto Slab', 'Noto Serif SC', serif;
+  }
+  
+  h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  img {
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s;
+    
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  blockquote {
+    border-left: 4px solid $main-color;
+    background-color: #f6f8fa;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #555;
+    margin: 20px 0;
+    
+    p {
+      margin: 0;
+    }
+  }
+  
+  code {
+    background-color: #f3f4f5;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 0.9em;
+    color: #e83e8c;
+  }
+}
+
+// 代码块样式优化
+.highlight {
+  margin: 20px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  
+  pre {
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  figcaption {
+    font-size: 13px;
+    padding: 8px 15px;
+    background: #282c34;
+    color: #abb2bf;
+  }
+}
+
+// 标签云优化
+.tag-cloud {
+  a {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 12px;
+    background: #f5f5f5;
+    border-radius: 15px;
+    color: $text-color;
+    font-size: 14px !important;
+    transition: all 0.3s;
+    
+    &:hover {
+      background: $main-color;
+      color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// 分页样式优化
+.pagination {
+  margin: 40px 0;
+  
+  .page-number, .extend {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    
+    &:hover {
+      background: $main-color;
+      color: white;
+    }
+  }
+  
+  .current {
+    background: $main-color;
+    color: white;
+  }
+}
+
+// 页脚样式优化
+.footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 30px 0;
+  
+  a {
+    color: #9acdff;
+    
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+  
+  .footer-inner {
+    padding: 0 20px;
+  }
+  
+  .copyright {
+    margin: 15px 0;
+  }
+}
+
+// 返回顶部按钮
+.back-to-top {
+  background: $main-color;
+  color: white;
+  opacity: 0.8;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    opacity: 1;
+    background: $secondary-color;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 移动端优化
+@media (max-width: 767px) {
+  .post {
+    margin-bottom: 20px;
+  }
+  
+  .post-header {
+    padding: 15px 20px;
+  }
+  
+  .post-title {
+    font-size: 18px;
+  }
+  
+  .post-body {
+    padding: 0 20px 15px;
+  }
+}
+
+// 表格优化
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #eee;
+  }
+  
+  thead {
+    background-color: #f5f7f9;
+    
+    th {
+      font-weight: 600;
+    }
+  }
+  
+  tbody {
+    tr {
+      &:hover {
+        background-color: #f8f9fb;
+      }
+    }
+  }
+}
+
+// 链接样式
+a {
+  color: $main-color;
+  text-decoration: none;
+  transition: all 0.3s;
+  
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+// about页面样式优化
+.about-page {
+  .post-body {
+    h2 {
+      font-size: 20px;
+      color: $main-color;
+      position: relative;
+      padding-left: 15px;
+      
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 5px;
+        height: 18px;
+        width: 5px;
+        background: $main-color;
+        border-radius: 2px;
+      }
+    }
+    
+    ul {
+      padding-left: 20px;
+      
+      li {
+        margin-bottom: 10px;
+        list-style: circle;
+      }
+    }
+  }
+}
+
+// 动画效果
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.post, .pagination, .tag-cloud {
+  animation: fadeIn 0.8s ease-out;
+}

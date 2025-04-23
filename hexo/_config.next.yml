@@ -22,6 +22,10 @@ preloader:
 # 页面计时功能（例如阅读时间统计）
 symbols_count_time:
   enable: true
+  symbols: true        # 显示文章字数统计
+  time: true           # 显示阅读时间
+  total_symbols: true  # 显示所有文章总字数
+  total_time: true     # 显示所有文章预计总阅读时间
 
 # 自定义样式文件（不影响主题源码）
 custom_file_path:
@@ -30,28 +34,35 @@ custom_file_path:
 
 # 代码高亮设置
 code:
-  highlight_theme: atom-one-dark  # 代码主题，可选：normal, night, night eighties, atom-one-dark, github
+  highlight_theme: atom-one-dark  # 代码主题
   highlight_style: dracula        # 代码高亮风格
 
 codeblock:
   highlight_style: dracula        # 代码块高亮风格（暗色主题）
   copy_button: true               # 显示代码复制按钮
+  line_number: true               # 显示行号
+  fold:                           # 代码块折叠
+    enable: true
+    height: 500                   # 超过此高度将被折叠
 
 # 字体设置
 font:
   enable: true
   global:
-    family: "'Noto Serif SC', serif"
+    family: "'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+    size: 16px
   headings:
-    family: "'Roboto Slab', sans-serif"  # 合并标题字体，建议加载外部字体时在页面中引入对应资源
+    family: "'Roboto Slab', 'Noto Serif SC', serif"
     external: true
+    weight: 600
   posts:
-    family: "'Noto Sans SC', sans-serif"
+    family: "'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+    size: 16px
 
 # 文章内容摘要设置
 index_post_content:
   method: 2       # 自动截取摘要
-  length: 150     # 摘要长度（字符数）
+  length: 250     # 摘要长度（字符数）
 
 # 文章缩略图开关
 post_thumbnail: true
@@ -71,33 +82,96 @@ leancloud_visitors:
 local_search:
   enable: true
   trigger: auto
-  top_n_per_article: 1
+  top_n_per_article: 3
+  unescape: true    # 解码HTML实体
+  preload: true     # 预加载搜索数据
 
 # 页脚信息设置
 footer:
-  since: 2025                # 博客起始年份（可修改为你博客的实际年份）
+  since: 2023                # 博客起始年份
   powered:
     enable: false            # 隐藏 "Powered by Hexo"
-  custom_text: "© 2025 My Blog"  # 自定义页脚文本
+  custom_text: "© 2023-2025 CKJ's Blog" 
+  icon:
+    name: fa fa-heart        # 添加一个心形图标
+    animated: true           # 允许图标动画
+    color: "#ff0000"         # 图标颜色
 
 # 社交链接
 social:
   GitHub: https://github.com/ckj3134 || fa fa-github
   Email: mailto:491565693@qq.com || fa fa-envelope
+  RSS: /atom.xml || fa fa-rss
 
 # 头像设置
 avatar:
   url: /images/avater.jpg  # 头像图片路径
   rounded: true            # 圆形头像
-  opacity: 0.9
+  opacity: 1.0
+  rotated: true            # 鼠标悬停时旋转头像
 
 # 文章元信息和卡片样式
 post_meta:
-  style: block             # 可选：block / inline
+  item_text: true          # 显示文本
+  created_at: true         # 显示创建时间
+  updated_at:              # 显示更新时间
+    enable: true
+    another_day: true      # 仅当更新日期与创建日期不同时显示
+  categories: true         # 显示分类
+  tags: true               # 显示标签
+  wordcount: true          # 显示字数统计
+  views: true              # 显示浏览量
 
 post_card:
   style: shadow            # 可选：shadow / flat / bordered
 
 # 分页样式
 pagination:
-  style: scroll            # 可选：scroll, classic, next
+  style: round             # 可选：border, shadow, round
+  size: small              # 可选：small, medium, large
+  position: centered       # 可选：left, center, right
+
+# 阅读进度条
+reading_progress:
+  enable: true
+  position: top            # 进度条位置
+  color: "#37c6c0"         # 进度条颜色
+  height: 3px              # 进度条高度
+
+# 返回顶部按钮
+back2top:
+  enable: true
+  sidebar: false           # 如果设置为 true，则显示在侧边栏中
+  scrollpercent: true      # 显示滚动百分比
+
+# 图像缩放
+fancybox: true             # 启用图像缩放
+
+# 动画效果
+motion:
+  enable: true
+  async: true
+  transition:
+    post_block: fadeIn      # 文章块动画
+    post_header: slideDownIn # 文章标题动画
+    post_body: slideDownIn   # 文章内容动画
+    coll_header: slideLeftIn # 折叠标题动画
+
+# 标签云设置
+tagcloud:
+  enable: true
+  amount: 100              # 最多显示多少个标签
+  min_font: 12             # 最小字体大小
+  max_font: 22             # 最大字体大小
+  color: true              # 使用颜色
+  start_color: "#9e9e9e"   # 起始颜色
+  end_color: "#37c6c0"     # 结束颜色
+
+# 相关文章推荐
+related_posts:
+  enable: true
+  title: 相关文章       # 自定义标题
+  display_in_home: true  # 是否在首页显示
+  params:
+    maxCount: 5          # 最多显示数量
+    orderBy: date        # 排序方式
