@@ -1,7 +1,9 @@
 ---
 title: Ethernaut第1关-fallback解题指南
 date: 2025-04-09 00:30:46
-tags: web3,securtiy
+tags:
+  - web3
+  - security
 ---
 
 # Ethernaut 第 1 关 - Fallback 解题指南

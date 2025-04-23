@@ -1,7 +1,9 @@
 ---
 title: Ethernaut第2关-fallout解题指南
 date: 2025-04-10 00:06:17
-tags: web3,安全
+tags:
+  - web3
+  - 安全
 ---
 
 # Ethernaut 第 2 关 - Fallout 解题指南（使用 Remix）
