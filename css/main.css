@@ -1437,7 +1437,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #6ee9f5;
+    background: #ff4ef6;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -3182,6 +3182,15 @@ body {
   margin-right: 12px;
 }
 .post-meta .post-meta-icon {
+  margin-right: 3px;
+}
+.post-meta .leancloud-visitors-count {
+  display: inline-block !important;
+  visibility: visible !important;
+  color: #777;
+  font-weight: normal;
+}
+.post-meta .visitors-count-icon {
   margin-right: 3px;
 }
 .post-body {
