@@ -14,6 +14,11 @@ body {
   transition: all 0.3s;
   letter-spacing: 0.01em;
   color: $text-color;
+  
+  @media (prefers-color-scheme: dark) {
+    background: #1a1a1a;
+    color: #e0e0e0;
+  }
 }
 
 // 头部导航栏优化
@@ -58,6 +63,11 @@ body {
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
   }
 }
 
@@ -111,18 +121,23 @@ body {
   p {
     margin: 0 0 20px;
     line-height: 1.8;
+    color: inherit;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     margin: 35px 0 15px;
-    color: #222;
+    color: inherit;
     font-family: 'Roboto Slab', 'Noto Serif SC', serif;
   }
   
   h2 {
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
+    
+    @media (prefers-color-scheme: dark) {
+      border-bottom-color: #444;
+    }
   }
   
   img {
@@ -146,6 +161,11 @@ body {
     color: #555;
     margin: 20px 0;
     
+    @media (prefers-color-scheme: dark) {
+      background-color: #333;
+      color: #ddd;
+    }
+    
     p {
       margin: 0;
     }
@@ -157,6 +177,11 @@ body {
     padding: 2px 5px;
     font-size: 0.9em;
     color: #e83e8c;
+    
+    @media (prefers-color-scheme: dark) {
+      background-color: #2d2d2d;
+      color: #f8f8f2;
+    }
   }
 }
 
