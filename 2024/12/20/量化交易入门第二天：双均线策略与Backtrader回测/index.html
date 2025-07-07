@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family='Noto+Serif+SC':ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family='PingFang+SC':ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family='Microsoft+YaHei':ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=sans-serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family='Roboto+Slab':ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family='Noto+Sans+SC':ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" integrity="sha256-zM8WXtG4eUn7dKKNMTuoWZub++VnSfaOpA/8PJfvTBo=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ckj3134.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":true,"fold":{"enable":true,"height":500},"language":false,"highlight_style":"dracula","line_number":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":3,"unescape":true,"preload":true,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="深入学习经典的双均线交叉策略，使用Backtrader框架进行策略回测，掌握技术分析基础和策略性能评估方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量化交易入门第二天：双均线策略与Backtrader回测">
+<meta property="og:url" content="https://ckj3134.github.io/2024/12/20/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B/index.html">
+<meta property="og:site_name" content="从零开始的安全 or web3?">
+<meta property="og:description" content="深入学习经典的双均线交叉策略，使用Backtrader框架进行策略回测，掌握技术分析基础和策略性能评估方法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-20T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-07T14:03:13.345Z">
+<meta property="article:author" content="ccc ckj!">
+<meta property="article:tag" content="量化交易">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Backtrader">
+<meta property="article:tag" content="双均线策略">
+<meta property="article:tag" content="技术分析">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ckj3134.github.io/2024/12/20/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://ckj3134.github.io/2024/12/20/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B/","path":"2024/12/20/量化交易入门第二天：双均线策略与Backtrader回测/","title":"量化交易入门第二天：双均线策略与Backtrader回测"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>量化交易入门第二天：双均线策略与Backtrader回测 | 从零开始的安全 or web3?</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js" integrity="sha256-hiUEBwFEpLF6DlB8sGXlKo4kPZ46Ui4qGpd0vrVkOm4=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"paNtUYfs3UmVwxGOs7Zcl60V-gzGzoHsz","app_key":"T3SBqYhheuIK6GP9gKcE7faa","server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">从零开始的安全 or web3?</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-crypto-prediction"><a href="/crypto-prediction/" rel="section"><i class="fa fa-chart-line fa-fw"></i>crypto-prediction</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B-%F0%9F%93%88"><span class="nav-number">1.</span> <span class="nav-text">量化交易入门第二天：双均线策略与Backtrader回测 📈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E4%BB%8A%E6%97%A5%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">🎯 今日学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%96-%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">1.2.</span> <span class="nav-text">📖 理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E7%BA%BF%E5%9F%BA%E7%A1%80"><span class="nav-number">1.2.1.</span> <span class="nav-text">移动平均线基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E7%BA%BF%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">简单移动平均线计算公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E7%BA%BF%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">移动平均线的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">双均线策略原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%98%93%E4%BF%A1%E5%8F%B7%E8%A7%84%E5%88%99"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">交易信号规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E9%80%BB%E8%BE%91"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">策略逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">双均线策略的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%9C%85-%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">✅ 优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%9D%8C-%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">❌ 缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">🛠️ 技术实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%AD%96%E7%95%A5%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心策略类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%B5%8B%E5%BC%95%E6%93%8E%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">回测引擎设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8A-%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text">📊 性能指标分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%8C%87%E6%A0%87%E8%AF%B4%E6%98%8E"><span class="nav-number">1.4.1.</span> <span class="nav-text">关键指标说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%8E%AF-%E6%94%B6%E7%9B%8A%E6%8C%87%E6%A0%87"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">🎯 收益指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E9%A3%8E%E9%99%A9%E6%8C%87%E6%A0%87"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">⚠️ 风险指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%93%88-%E4%BA%A4%E6%98%93%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">📈 交易统计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">结果分析代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E5%AE%9E%E6%88%98%E8%BF%90%E8%A1%8C"><span class="nav-number">1.5.</span> <span class="nav-text">🚀 实战运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.1.</span> <span class="nav-text">环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">1.5.2.</span> <span class="nav-text">运行方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%AF%94%E8%BE%83"><span class="nav-number">1.5.3.</span> <span class="nav-text">策略比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">输出文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%88-%E5%AE%9E%E6%88%98%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="nav-number">1.6.</span> <span class="nav-text">📈 实战结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%89%B9%E8%89%B2"><span class="nav-number">1.6.1.</span> <span class="nav-text">可视化特色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%94%AF%E6%8C%81"><span class="nav-number">1.6.2.</span> <span class="nav-text">中文字体支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.7.</span> <span class="nav-text">💡 策略优化建议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98"><span class="nav-number">1.7.1.</span> <span class="nav-text">参数调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E8%BF%87%E6%BB%A4"><span class="nav-number">1.7.2.</span> <span class="nav-text">信号过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6"><span class="nav-number">1.7.3.</span> <span class="nav-text">风险控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.8.</span> <span class="nav-text">⚠️ 重要注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">1.8.1.</span> <span class="nav-text">策略局限性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%B5%8B%E5%81%8F%E5%B7%AE"><span class="nav-number">1.8.2.</span> <span class="nav-text">回测偏差</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%93-%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97"><span class="nav-number">1.9.</span> <span class="nav-text">🎓 学习心得</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%94%B6%E8%8E%B7"><span class="nav-number">1.9.1.</span> <span class="nav-text">今日收获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%B4%9E%E5%AF%9F"><span class="nav-number">1.9.2.</span> <span class="nav-text">关键洞察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E8%AE%A1%E5%88%92"><span class="nav-number">1.9.3.</span> <span class="nav-text">下一步计划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%97-%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">1.10.</span> <span class="nav-text">🔗 相关链接</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ccc ckj!"
+      src="/images/avater.jpg">
+  <p class="site-author-name" itemprop="name">ccc ckj!</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ckj3134" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ckj3134" rel="noopener me" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:491565693@qq.com" title="Email → mailto:491565693@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://ckj3134.github.io/2024/12/20/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avater.jpg">
+      <meta itemprop="name" content="ccc ckj!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="从零开始的安全 or web3?">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="量化交易入门第二天：双均线策略与Backtrader回测 | 从零开始的安全 or web3?">
+      <meta itemprop="description" content="深入学习经典的双均线交叉策略，使用Backtrader框架进行策略回测，掌握技术分析基础和策略性能评估方法。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          量化交易入门第二天：双均线策略与Backtrader回测
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-12-20 10:00:00" itemprop="dateCreated datePublished" datetime="2024-12-20T10:00:00+08:00">2024-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-07 22:03:13" itemprop="dateModified" datetime="2025-07-07T22:03:13+08:00">2025-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/" itemprop="url" rel="index"><span itemprop="name">量化交易</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2024/12/20/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%BA%8C%E5%A4%A9%EF%BC%9A%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5%E4%B8%8EBacktrader%E5%9B%9E%E6%B5%8B/" class="post-meta-item leancloud_visitors" data-flag-title="量化交易入门第二天：双均线策略与Backtrader回测" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+            <div class="post-description">深入学习经典的双均线交叉策略，使用Backtrader框架进行策略回测，掌握技术分析基础和策略性能评估方法。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="量化交易入门第二天：双均线策略与Backtrader回测-📈"><a href="#量化交易入门第二天：双均线策略与Backtrader回测-📈" class="headerlink" title="量化交易入门第二天：双均线策略与Backtrader回测 📈"></a>量化交易入门第二天：双均线策略与Backtrader回测 📈</h1><h2 id="🎯-今日学习目标"><a href="#🎯-今日学习目标" class="headerlink" title="🎯 今日学习目标"></a>🎯 今日学习目标</h2><p>在第一天掌握了数据获取与处理的基础上，第二天我们将深入学习量化交易的核心内容：</p>
+<ul>
+<li>📊 <strong>技术分析基础</strong>：理解移动平均线和交易信号原理</li>
+<li>🔄 <strong>策略开发</strong>：实现经典的双均线交叉策略</li>
+<li>🧪 <strong>回测框架</strong>：掌握Backtrader框架的使用方法</li>
+<li>📈 <strong>性能评估</strong>：学会分析策略的收益率、回撤等关键指标</li>
+<li>⚖️ <strong>策略比较</strong>：对比不同参数和策略的表现</li>
+</ul>
+<h2 id="📖-理论基础"><a href="#📖-理论基础" class="headerlink" title="📖 理论基础"></a>📖 理论基础</h2><h3 id="移动平均线基础"><a href="#移动平均线基础" class="headerlink" title="移动平均线基础"></a>移动平均线基础</h3><p><strong>移动平均线（Moving Average, MA）</strong> 是技术分析中最基础也是最重要的指标之一。</p>
+<h4 id="简单移动平均线计算公式"><a href="#简单移动平均线计算公式" class="headerlink" title="简单移动平均线计算公式"></a>简单移动平均线计算公式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMA_n = (P1 + P2 + ... + Pn) / n</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>P1, P2, …, Pn 是过去n期的收盘价</li>
+<li>n 是移动平均的周期</li>
+</ul>
+<h4 id="移动平均线的作用"><a href="#移动平均线的作用" class="headerlink" title="移动平均线的作用"></a>移动平均线的作用</h4><ul>
+<li><strong>趋势识别</strong> 📊：平滑价格波动，显示主要趋势方向</li>
+<li><strong>支撑阻力</strong> 🏗️：价格往往在均线附近找到支撑或遇到阻力</li>
+<li><strong>信号生成</strong> ⚡：价格与均线的交叉可以产生交易信号</li>
+</ul>
+<h3 id="双均线策略原理"><a href="#双均线策略原理" class="headerlink" title="双均线策略原理"></a>双均线策略原理</h3><p>双均线策略使用两条不同周期的移动平均线：</p>
+<ul>
+<li><strong>快线（短期均线）</strong> 🏃‍♂️：如5日、10日移动平均线</li>
+<li><strong>慢线（长期均线）</strong> 🚶‍♂️：如20日、30日移动平均线</li>
+</ul>
+<h4 id="交易信号规则"><a href="#交易信号规则" class="headerlink" title="交易信号规则"></a>交易信号规则</h4><ul>
+<li><strong>买入信号（金叉）</strong> 🟢：快线从下方穿越慢线</li>
+<li><strong>卖出信号（死叉）</strong> 🔴：快线从上方穿越慢线</li>
+</ul>
+<h4 id="策略逻辑"><a href="#策略逻辑" class="headerlink" title="策略逻辑"></a>策略逻辑</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果 MA_短期 &gt; MA_长期 且 昨日MA_短期 &lt;= 昨日MA_长期:</span><br><span class="line">    产生买入信号 📈</span><br><span class="line">如果 MA_短期 &lt; MA_长期 且 昨日MA_短期 &gt;= 昨日MA_长期:</span><br><span class="line">    产生卖出信号 📉</span><br></pre></td></tr></table></figure>
+
+<h3 id="双均线策略的优缺点"><a href="#双均线策略的优缺点" class="headerlink" title="双均线策略的优缺点"></a>双均线策略的优缺点</h3><h4 id="✅-优点"><a href="#✅-优点" class="headerlink" title="✅ 优点"></a>✅ 优点</h4><ul>
+<li><strong>简单易懂</strong>：逻辑清晰，容易实现</li>
+<li><strong>趋势跟踪</strong>：能够捕捉中长期趋势</li>
+<li><strong>风险控制</strong>：有明确的进出场规则</li>
+<li><strong>广泛适用</strong>：适用于多种市场和时间周期</li>
+</ul>
+<h4 id="❌-缺点"><a href="#❌-缺点" class="headerlink" title="❌ 缺点"></a>❌ 缺点</h4><ul>
+<li><strong>滞后性</strong>：移动平均线是滞后指标</li>
+<li><strong>震荡市表现差</strong>：在横盘整理时容易产生虚假信号</li>
+<li><strong>参数敏感</strong>：不同的均线周期组合效果差异很大</li>
+</ul>
+<h2 id="🛠️-技术实现"><a href="#🛠️-技术实现" class="headerlink" title="🛠️ 技术实现"></a>🛠️ 技术实现</h2><h3 id="核心策略类"><a href="#核心策略类" class="headerlink" title="核心策略类"></a>核心策略类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DualMAStrategy</span>(bt.Strategy):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;双均线交叉策略&quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 策略参数</span></span><br><span class="line">    params = (</span><br><span class="line">        (<span class="string">&#x27;ma_fast&#x27;</span>, <span class="number">5</span>),      <span class="comment"># 快速移动平均线周期</span></span><br><span class="line">        (<span class="string">&#x27;ma_slow&#x27;</span>, <span class="number">20</span>),     <span class="comment"># 慢速移动平均线周期</span></span><br><span class="line">        (<span class="string">&#x27;printlog&#x27;</span>, <span class="literal">True</span>),  <span class="comment"># 是否打印日志</span></span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;初始化策略&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 获取数据</span></span><br><span class="line">        <span class="variable language_">self</span>.dataclose = <span class="variable language_">self</span>.datas[<span class="number">0</span>].close</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算移动平均线</span></span><br><span class="line">        <span class="variable language_">self</span>.ma_fast = bt.indicators.SimpleMovingAverage(</span><br><span class="line">            <span class="variable language_">self</span>.datas[<span class="number">0</span>], period=<span class="variable language_">self</span>.params.ma_fast</span><br><span class="line">        )</span><br><span class="line">        <span class="variable language_">self</span>.ma_slow = bt.indicators.SimpleMovingAverage(</span><br><span class="line">            <span class="variable language_">self</span>.datas[<span class="number">0</span>], period=<span class="variable language_">self</span>.params.ma_slow</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算交叉信号</span></span><br><span class="line">        <span class="variable language_">self</span>.crossover = bt.indicators.CrossOver(<span class="variable language_">self</span>.ma_fast, <span class="variable language_">self</span>.ma_slow)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 记录订单和统计变量</span></span><br><span class="line">        <span class="variable language_">self</span>.order = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.trade_count = <span class="number">0</span></span><br><span class="line">        <span class="variable language_">self</span>.win_count = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">next</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;策略主逻辑&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 检查是否有待处理订单</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.order:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 检查是否持仓</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.position:</span><br><span class="line">            <span class="comment"># 没有持仓，检查买入信号</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.crossover[<span class="number">0</span>] &gt; <span class="number">0</span>:  <span class="comment"># 快线上穿慢线</span></span><br><span class="line">                cash = <span class="variable language_">self</span>.broker.get_cash()</span><br><span class="line">                <span class="comment"># 计算买入数量（使用95%的可用资金）</span></span><br><span class="line">                <span class="keyword">if</span> <span class="variable language_">self</span>.dataclose[<span class="number">0</span>] &gt; <span class="number">1000</span>:  <span class="comment"># 高价资产允许小数数量</span></span><br><span class="line">                    size = (cash * <span class="number">0.95</span>) / <span class="variable language_">self</span>.dataclose[<span class="number">0</span>]</span><br><span class="line">                    <span class="keyword">if</span> size &gt;= <span class="number">0.001</span>:</span><br><span class="line">                        <span class="variable language_">self</span>.order = <span class="variable language_">self</span>.buy(size=size)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    size = <span class="built_in">int</span>((cash * <span class="number">0.95</span>) / <span class="variable language_">self</span>.dataclose[<span class="number">0</span>])</span><br><span class="line">                    <span class="keyword">if</span> size &gt; <span class="number">0</span>:</span><br><span class="line">                        <span class="variable language_">self</span>.order = <span class="variable language_">self</span>.buy(size=size)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 持仓中，检查卖出信号</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.crossover[<span class="number">0</span>] &lt; <span class="number">0</span>:  <span class="comment"># 快线下穿慢线</span></span><br><span class="line">                <span class="variable language_">self</span>.order = <span class="variable language_">self</span>.sell(size=<span class="variable language_">self</span>.position.size)</span><br></pre></td></tr></table></figure>
+
+<h3 id="回测引擎设置"><a href="#回测引擎设置" class="headerlink" title="回测引擎设置"></a>回测引擎设置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_backtest</span>(<span class="params">df, strategy_class, **kwargs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;运行回测&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 创建回测引擎</span></span><br><span class="line">    cerebro = bt.Cerebro()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 添加策略</span></span><br><span class="line">    cerebro.addstrategy(strategy_class, **kwargs)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 添加数据</span></span><br><span class="line">    data = create_backtrader_data(df)</span><br><span class="line">    cerebro.adddata(data)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 设置初始资金和手续费</span></span><br><span class="line">    cerebro.broker.setcash(<span class="number">10000.0</span>)</span><br><span class="line">    cerebro.broker.setcommission(commission=<span class="number">0.001</span>)  <span class="comment"># 0.1%手续费</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 添加分析器</span></span><br><span class="line">    cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name=<span class="string">&#x27;sharpe&#x27;</span>)</span><br><span class="line">    cerebro.addanalyzer(bt.analyzers.DrawDown, _name=<span class="string">&#x27;drawdown&#x27;</span>)</span><br><span class="line">    cerebro.addanalyzer(bt.analyzers.Returns, _name=<span class="string">&#x27;returns&#x27;</span>)</span><br><span class="line">    cerebro.addanalyzer(bt.analyzers.TradeAnalyzer, _name=<span class="string">&#x27;trades&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 运行回测</span></span><br><span class="line">    results = cerebro.run()</span><br><span class="line">    <span class="keyword">return</span> cerebro, results</span><br></pre></td></tr></table></figure>
+
+<h2 id="📊-性能指标分析"><a href="#📊-性能指标分析" class="headerlink" title="📊 性能指标分析"></a>📊 性能指标分析</h2><h3 id="关键指标说明"><a href="#关键指标说明" class="headerlink" title="关键指标说明"></a>关键指标说明</h3><h4 id="🎯-收益指标"><a href="#🎯-收益指标" class="headerlink" title="🎯 收益指标"></a>🎯 收益指标</h4><ul>
+<li><strong>总收益率</strong>：(最终资金 - 初始资金) &#x2F; 初始资金</li>
+<li><strong>年化收益率</strong>：考虑时间因素的收益率</li>
+<li><strong>累计收益</strong>：绝对收益金额</li>
+</ul>
+<h4 id="⚠️-风险指标"><a href="#⚠️-风险指标" class="headerlink" title="⚠️ 风险指标"></a>⚠️ 风险指标</h4><ul>
+<li><strong>最大回撤</strong>：策略运行期间的最大亏损幅度</li>
+<li><strong>夏普比率</strong>：风险调整后的收益率</li>
+<li><strong>波动率</strong>：收益率的标准差</li>
+</ul>
+<h4 id="📈-交易统计"><a href="#📈-交易统计" class="headerlink" title="📈 交易统计"></a>📈 交易统计</h4><ul>
+<li><strong>总交易次数</strong>：完成的买卖对数</li>
+<li><strong>胜率</strong>：盈利交易占总交易的比例</li>
+<li><strong>平均盈利&#x2F;亏损</strong>：单次交易的平均盈亏</li>
+<li><strong>盈亏比</strong>：平均盈利与平均亏损的比值</li>
+</ul>
+<h3 id="结果分析代码"><a href="#结果分析代码" class="headerlink" title="结果分析代码"></a>结果分析代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">analyze_results</span>(<span class="params">results</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;分析回测结果&quot;&quot;&quot;</span></span><br><span class="line">    result = results[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n=== 回测结果分析 ===&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 夏普比率</span></span><br><span class="line">    sharpe_ratio = result.analyzers.sharpe.get_analysis()</span><br><span class="line">    <span class="keyword">if</span> sharpe_ratio <span class="keyword">and</span> <span class="string">&#x27;sharperatio&#x27;</span> <span class="keyword">in</span> sharpe_ratio:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;夏普比率: <span class="subst">&#123;sharpe_ratio[<span class="string">&#x27;sharperatio&#x27;</span>]:<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 最大回撤</span></span><br><span class="line">    drawdown = result.analyzers.drawdown.get_analysis()</span><br><span class="line">    <span class="keyword">if</span> drawdown <span class="keyword">and</span> <span class="string">&#x27;max&#x27;</span> <span class="keyword">in</span> drawdown:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;最大回撤: <span class="subst">&#123;drawdown[<span class="string">&#x27;max&#x27;</span>][<span class="string">&#x27;drawdown&#x27;</span>]:<span class="number">.2</span>f&#125;</span>%&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 交易分析</span></span><br><span class="line">    trades = result.analyzers.trades.get_analysis()</span><br><span class="line">    <span class="keyword">if</span> trades <span class="keyword">and</span> trades.get(<span class="string">&#x27;total&#x27;</span>, &#123;&#125;).get(<span class="string">&#x27;total&#x27;</span>, <span class="number">0</span>) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;总交易次数: <span class="subst">&#123;trades[<span class="string">&#x27;total&#x27;</span>][<span class="string">&#x27;total&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;胜率: <span class="subst">&#123;trades[<span class="string">&#x27;won&#x27;</span>][<span class="string">&#x27;total&#x27;</span>] / trades[<span class="string">&#x27;total&#x27;</span>][<span class="string">&#x27;total&#x27;</span>] * <span class="number">100</span>:<span class="number">.2</span>f&#125;</span>%&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="🚀-实战运行"><a href="#🚀-实战运行" class="headerlink" title="🚀 实战运行"></a>🚀 实战运行</h2><h3 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h3><p>首先安装必要的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install backtrader pandas numpy matplotlib seaborn</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行完整回测</span></span><br><span class="line">python day2_dual_ma_strategy.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="策略比较"><a href="#策略比较" class="headerlink" title="策略比较"></a>策略比较</h3><p>脚本会自动比较以下策略：</p>
+<ul>
+<li>双均线策略(5,20) 🔄</li>
+<li>双均线策略(10,30) 🔄</li>
+<li>买入并持有策略 📊</li>
+</ul>
+<h3 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h3><ul>
+<li><strong>回测结果CSV</strong>：<code>backtest_results_ETH_USD_processed_ccxt_1year.csv</code></li>
+<li><strong>可视化图表</strong>：包含价格走势、移动平均线、买卖信号等</li>
+</ul>
+<h2 id="📈-实战结果分析"><a href="#📈-实战结果分析" class="headerlink" title="📈 实战结果分析"></a>📈 实战结果分析</h2><h3 id="可视化特色"><a href="#可视化特色" class="headerlink" title="可视化特色"></a>可视化特色</h3><p>系统使用Seaborn创建美观的分析图表，包括：</p>
+<ol>
+<li><strong>价格走势图</strong> 📊：显示原始价格数据</li>
+<li><strong>移动平均线图</strong> 📈：展示MA5、MA10、MA20、MA30</li>
+<li><strong>收益率分布</strong> 📊：分析收益率的统计特性</li>
+<li><strong>交易量图</strong> 📊：显示成交量变化</li>
+<li><strong>累计收益曲线</strong> 📈：展示策略表现</li>
+<li><strong>策略性能热力图</strong> 🔥：多维度比较策略表现</li>
+</ol>
+<h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>系统智能检测并配置中文字体，支持：</p>
+<ul>
+<li>macOS：PingFang SC、Hiragino Sans GB</li>
+<li>通用：Arial Unicode MS、SimHei等</li>
+<li>自动回退机制确保兼容性</li>
+</ul>
+<h2 id="💡-策略优化建议"><a href="#💡-策略优化建议" class="headerlink" title="💡 策略优化建议"></a>💡 策略优化建议</h2><h3 id="参数调优"><a href="#参数调优" class="headerlink" title="参数调优"></a>参数调优</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 推荐参数范围</span></span><br><span class="line">快速均线：<span class="number">3</span>-<span class="number">10</span>期</span><br><span class="line">慢速均线：<span class="number">15</span>-<span class="number">50</span>期</span><br><span class="line">止损设置：固定百分比或ATR倍数</span><br><span class="line">仓位管理：固定仓位或动态调整</span><br></pre></td></tr></table></figure>
+
+<h3 id="信号过滤"><a href="#信号过滤" class="headerlink" title="信号过滤"></a>信号过滤</h3><ul>
+<li>✅ 添加成交量确认</li>
+<li>✅ 结合RSI等振荡指标</li>
+<li>✅ 考虑市场趋势过滤</li>
+<li>✅ 避免震荡市场的假信号</li>
+</ul>
+<h3 id="风险控制"><a href="#风险控制" class="headerlink" title="风险控制"></a>风险控制</h3><ul>
+<li>🛡️ 设置最大回撤限制</li>
+<li>🛡️ 实施止损止盈机制</li>
+<li>🛡️ 控制单笔交易风险</li>
+<li>🛡️ 分散投资降低风险</li>
+</ul>
+<h2 id="⚠️-重要注意事项"><a href="#⚠️-重要注意事项" class="headerlink" title="⚠️ 重要注意事项"></a>⚠️ 重要注意事项</h2><h3 id="策略局限性"><a href="#策略局限性" class="headerlink" title="策略局限性"></a>策略局限性</h3><ul>
+<li><strong>震荡市场</strong> 📉：容易产生假信号</li>
+<li><strong>滞后性</strong> ⏰：错过最佳进出点</li>
+<li><strong>趋势依赖</strong> 📈：需要明显的趋势才能获利</li>
+<li><strong>手续费影响</strong> 💰：对高频交易影响较大</li>
+</ul>
+<h3 id="回测偏差"><a href="#回测偏差" class="headerlink" title="回测偏差"></a>回测偏差</h3><ul>
+<li><strong>未来函数</strong> ⚠️：确保不使用未来数据</li>
+<li><strong>幸存者偏差</strong> ⚠️：考虑退市股票</li>
+<li><strong>流动性假设</strong> ⚠️：实际交易可能有滑点</li>
+<li><strong>手续费设置</strong> ⚠️：需要符合实际情况</li>
+</ul>
+<h2 id="🎓-学习心得"><a href="#🎓-学习心得" class="headerlink" title="🎓 学习心得"></a>🎓 学习心得</h2><h3 id="今日收获"><a href="#今日收获" class="headerlink" title="今日收获"></a>今日收获</h3><p>通过第2天的学习，我深入理解了：</p>
+<ol>
+<li><strong>技术分析基础</strong> 📚：移动平均线是技术分析的重要工具</li>
+<li><strong>策略设计思路</strong> 💭：简单的交叉策略也能产生有效信号</li>
+<li><strong>回测框架使用</strong> 🔧：Backtrader提供了强大的策略开发平台</li>
+<li><strong>性能评估方法</strong> 📊：多维度分析策略的优劣势</li>
+<li><strong>风险意识培养</strong> ⚠️：任何策略都有其适用范围和局限性</li>
+</ol>
+<h3 id="关键洞察"><a href="#关键洞察" class="headerlink" title="关键洞察"></a>关键洞察</h3><ul>
+<li><strong>趋势为王</strong> 👑：双均线策略在趋势市场中表现优异</li>
+<li><strong>参数重要性</strong> ⚙️：不同的参数组合会产生显著不同的结果</li>
+<li><strong>风险控制</strong> 🛡️：回撤控制比追求高收益更重要</li>
+<li><strong>市场适应性</strong> 🔄：策略需要根据市场环境调整</li>
+</ul>
+<h3 id="下一步计划"><a href="#下一步计划" class="headerlink" title="下一步计划"></a>下一步计划</h3><p>第3天将学习：</p>
+<ul>
+<li>策略扩展与参数优化 🔧</li>
+<li>添加更多技术指标 📊</li>
+<li>实现参数优化算法 🤖</li>
+<li>避免过拟合的技巧 ⚠️</li>
+</ul>
+<h2 id="🔗-相关链接"><a href="#🔗-相关链接" class="headerlink" title="🔗 相关链接"></a>🔗 相关链接</h2><ul>
+<li><a href="../%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%B8%80%E5%A4%A9%EF%BC%9A%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E4%B8%8E%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/">第1天：数据获取与处理实战</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.backtrader.com/">Backtrader官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ckj3134/trade_study">量化交易GitHub项目</a></li>
+</ul>
+<hr>
+<p><strong>免责声明</strong> ⚠️：本文内容仅供学习和研究使用，不构成投资建议。量化交易存在风险，实际投资前请谨慎评估。回测结果不代表未来表现，过往业绩不预示未来收益。</p>
+<p><strong>版权声明</strong> ©️：本文为量化交易学习系列原创内容，欢迎学习交流，转载请注明出处。 </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/" rel="tag"># 量化交易</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Backtrader/" rel="tag"># Backtrader</a>
+              <a href="/tags/%E5%8F%8C%E5%9D%87%E7%BA%BF%E7%AD%96%E7%95%A5/" rel="tag"># 双均线策略</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" rel="tag"># 技术分析</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/22/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%E7%AC%AC%E4%B8%80%E5%A4%A9%EF%BC%9A%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E4%B8%8E%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/" rel="next" title="量化交易入门第一天：数据获取与处理实战">
+                  量化交易入门第一天：数据获取与处理实战 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ccc ckj!</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
